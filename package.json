@@ -1,0 +1,24 @@
+{
+  "name": "standardserver",
+  "version": "1.0.0",
+  "description": "Todas las funcionalidades basicas de mobile",
+  "main": "app.js",
+  "scripts": {
+    "test": "hola",
+    "serve": "nodemon app.js"
+  },
+  "author": "Ezequiel Buceta",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "jsonwebtoken": "^7.4.1",
+    "mongodb": "^2.2.29",
+    "mongoose": "^4.11.0",
+    "request": "^2.83.0",
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
