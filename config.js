@@ -1,6 +1,6 @@
 module.exports = {
 
-    'secret': 'ezeprueba',
-    'database': 'mongodb://standarduser:standardpassword@ds033297.mlab.com:33297/stardardapp'
+    'secret': 'cursandosecretpassword1991',
+    'database': 'mongodb://ezequiel_cursando:amelie91@ds243055.mlab.com:43055/cursando'
 
 };

@@ -1,7 +1,7 @@
 {
-  "name": "standardserver",
+  "name": "cursandoserver",
   "version": "1.0.0",
-  "description": "Todas las funcionalidades basicas de mobile",
+  "description": "Cursando",
   "main": "app.js",
   "scripts": {
     "test": "hola",
@@ -11,7 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "ejs": "^2.5.7",
     "express": "^4.15.3",
+    "firebase": "^4.6.2",
     "jsonwebtoken": "^7.4.1",
     "mongodb": "^2.2.29",
     "mongoose": "^4.11.0",

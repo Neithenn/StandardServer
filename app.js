@@ -17,11 +17,14 @@ app.use(cors());
 app.options('*', cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
 
 mongoose.connect(config.database); 
 
 //app.use(require('./middlewares/auth'));
 app.use(require('./controllers/login'));
+app.use(require('./controllers/reset_password'));
 app.use(require('./controllers/fcm'));
 app.use(require('./controllers/chatmsg'));		
 
@@ -49,16 +52,6 @@ io.on('connection', function(socket){
 					console.log('el chat ya existe '+doc._id);
 					socket.join(doc._id);
 
-
-					/*Chat.find({chatroom: doc._id}).limit(10).sort({_id: 1}).exec(function(err, docs){
-						if (err) throw err;
-						if (docs){
-							console.log('mensajes viejos enviados');
-							socket.in(doc._id).emit('initial:broadcast', docs);	
-						}
-					});*/
-
-
 				}else{
 					//crear nuevo chat room
 					var newChat = new Chatroom(participants);
@@ -70,27 +63,7 @@ io.on('connection', function(socket){
 
 			})
 	})
-	/*
-	socket.on('saved:messages', function(participants){
-		console.log('solicita mensajes viejos:'+ participants.user_a);
-		Chatroom.findOne({ 
-			$or:[
-					{$and: [{user_a: participants.user_a, user_b: participants.user_b}]},
-					{$and: [{user_a: participants.user_b, user_b: participants.user_a}]}
-				]},
-			function(err, doc){
 
-				if (err) throw err;
-					//Le tengo que mandar los msg viejos
-					Chat.find({chatroom: doc._id}).limit(10).sort({_id: -1}).exec(function(err, docs){
-						if (err) throw err;
-						if (docs){
-							socket.in(doc._id).emit('initial:broadcast', docs);	
-						}
-					});
-			});
-	
-	})*/
 	//enviar mensaje al otro
 	socket.on('send:message', function(msg){
 		//el mensaje debe contener: enviador, remitente, mensaje

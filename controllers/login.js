@@ -18,9 +18,14 @@ apiRoutes.post('/api/authenticate', function(req, res) {
 		if (!user){
 			//res.json({success: false, message: 'No encontramos tu usuario registrado!'});
 			//Crear nuevo usuario
+
 			var newUser = new User(req.body.user);
 			newUser.save(function(err, user2){
+				
 				if(err) throw err;
+				
+				console.log('nuevo usuario creado '+user2._id);
+
 				var token = jwt.sign(newUser, app.get('superSecret'),{
 
 				});
@@ -28,12 +33,13 @@ apiRoutes.post('/api/authenticate', function(req, res) {
 				  res.json({
 			          success: true,
 			          uid: user2._id,
+			          name: user2.name,
 			          token: token
 			        });	
 				})
 
 		}else if (user){
-			console.log(user);
+			console.log('usuario ya existe '+user._id);
 			var token = jwt.sign(user, app.get('superSecret'),{
 
 			});
@@ -41,6 +47,7 @@ apiRoutes.post('/api/authenticate', function(req, res) {
 			  res.json({
 		          success: true,
 		          uid: user._id,
+		          name: user.name,
 		          token: token
 		        });	
 		}
